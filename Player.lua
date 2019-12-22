@@ -10,7 +10,8 @@ local Player = {
 }
 
 function Player:draw()
-    lg.draw(self.image, self.x, self.y)
+    lg.draw(self.image, self.x + self.image:getWidth() / 2, self.y + self.image:getHeight() / 2,
+            self.angle, 1, 1, self.image:getWidth() / 2, self.image:getHeight() / 2)
 end
 
 function Player:update(dt)
@@ -34,6 +35,12 @@ function Player:update(dt)
     if self.jumpPressed then
         self:jump()
         self.jumpPressed = false
+    end
+
+    if self.doubleJumping then
+        self.angle = self.angle + dt * 5
+    else
+        self.angle = 0
     end
 
 end
